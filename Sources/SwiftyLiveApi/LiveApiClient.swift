@@ -24,7 +24,7 @@ public class LiveApiClient {
        - apiKey: Your api key.
        - requestLimitPerMinute: Maximum amount of requests per minute after which further requests will be blocked until the end of the minute. Go above 100 at your own risk.
      */
-    init(_ apiKey: String, requestLimitPerMinute: Int = 100) {
+    public init(_ apiKey: String, requestLimitPerMinute: Int = 100) {
         self.apiKey = apiKey
         self.requestLimitPerMinute = requestLimitPerMinute
         self.requestsThisMinuteTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { _ in
