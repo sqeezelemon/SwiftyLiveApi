@@ -370,7 +370,7 @@ extension LiveApiError: LocalizedError {
         case .noAtisAvailable:
             return "ERROR CODE 7: No Atis Available"
         case .unknownErrorCode:
-            return "ERROR CODE 64: Unknown LiveAPI Error Code"
+            return "Unknown LiveAPI Error Code"
         }
     }
 }
