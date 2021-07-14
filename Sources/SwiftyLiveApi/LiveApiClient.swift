@@ -91,13 +91,13 @@ public class LiveApiClient {
         for session in sessions {
             let name = session.name.lowercased()
             if name.contains("expert") {
-                ServerId.expert = session.id
+                LiveServer.expertId = session.id
                 print("refreshSessionIds: set id \(session.id) for \(session.name)")
             } else if name.contains("training") {
-                ServerId.training = session.id
+                LiveServer.trainingId = session.id
                 print("refreshSessionIds: set id \(session.id) for \(session.name)")
             } else if name.contains("casual") {
-                ServerId.casual = session.id
+                LiveServer.casualId = session.id
                 print("refreshSessionIds: set id \(session.id) for \(session.name)")
             }
         }
@@ -346,8 +346,21 @@ public class LiveApiClient {
     }
 }
 
-public enum ServerId {
-    static var expert = ""
-    static var training = ""
-    static var casual = ""
+public enum LiveServer {
+    static internal var expertId = ""
+    static internal var trainingId = ""
+    static internal var casualId = ""
+    
+    case training, expert, casual
+    
+    public var id: String {
+        switch self {
+        case .casual:
+            return LiveServer.casualId
+        case .training:
+            return LiveServer.trainingId
+        case .expert:
+            return LiveServer.expertId
+        }
+    }
 }
