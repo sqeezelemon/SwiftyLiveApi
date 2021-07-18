@@ -88,15 +88,37 @@ public class LiveApiClient {
      */
     public func getSessions() throws -> [Session] {
         let data: [Session] = try getJsonData(RequestPath.sessions)
+        updateSessionIds(sessions: data)
         return data
     }
     
     /**
      Refresh server ids inside ServerId enum
      */
+    @available(*, deprecated, message: "getSessions now does that automatically when called. If needed, just call getSessions() and ignore the returned data")
     public func refreshSessionIds() {
         let sessions: [Session] = (try? getSessions()) ?? []
         print("refreshSessionIds: got \(sessions.count) sessions")
+        for session in sessions {
+            let name = session.name.lowercased()
+            if name.contains("expert") {
+                LiveServer.expertId = session.id
+                print("refreshSessionIds: set id \(session.id) for \(session.name)")
+            } else if name.contains("training") {
+                LiveServer.trainingId = session.id
+                print("refreshSessionIds: set id \(session.id) for \(session.name)")
+            } else if name.contains("casual") {
+                LiveServer.casualId = session.id
+                print("refreshSessionIds: set id \(session.id) for \(session.name)")
+            }
+        }
+    }
+    
+    /**
+     Updates session ids inside LiveServer enum
+     - Parameter sessions: array of ```Session``` objects
+     */
+    public func updateSessionIds(sessions: [Session]) {
         for session in sessions {
             let name = session.name.lowercased()
             if name.contains("expert") {
