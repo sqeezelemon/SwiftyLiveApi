@@ -14,6 +14,14 @@ internal struct LiveApiResponseWrapper<T: Codable>: Codable {
 
 //MARK: Get Sessions
 public struct Session: Codable {
+    public init(maxUsers: Int, id: String, name: String, userCount: Int, type: Int) {
+        self.maxUsers = maxUsers
+        self.id = id
+        self.name = name
+        self.userCount = userCount
+        self.type = type
+    }
+    
     public var maxUsers: Int
     public var id: String
     public var name: String
@@ -23,6 +31,24 @@ public struct Session: Codable {
 
 //MARK: Get Flights
 public struct Flight: Codable {
+    public init(username: String? = nil, callsign: String, latitude: Float, longitude: Float, altitude: Float, speed: Float, verticalSpeed: Float, track: Float, lastReport: String, flightId: String, userId: String, aircraftId: String, liveryId: String, heading: Float, virtualOrganization: String? = nil) {
+        self.username = username
+        self.callsign = callsign
+        self.latitude = latitude
+        self.longitude = longitude
+        self.altitude = altitude
+        self.speed = speed
+        self.verticalSpeed = verticalSpeed
+        self.track = track
+        self.lastReport = lastReport
+        self.flightId = flightId
+        self.userId = userId
+        self.aircraftId = aircraftId
+        self.liveryId = liveryId
+        self.heading = heading
+        self.virtualOrganization = virtualOrganization
+    }
+    
     public var username: String?
     public var callsign: String
     public var latitude: Float
@@ -45,6 +71,15 @@ public struct Flight: Codable {
 
 //MARK: Get Flight Route
 public struct PositionReport: Codable {
+    public init(latitude: Float, longitude: Float, altitude: Float, track: Float, groundSpeed: Float, date: String) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.altitude = altitude
+        self.track = track
+        self.groundSpeed = groundSpeed
+        self.date = date
+    }
+    
     public var latitude: Float
     public var longitude: Float
     public var altitude: Float
@@ -61,6 +96,14 @@ public struct PositionReport: Codable {
 
 //MARK: Get Detailed Flight Plan
 public struct FlightPlan: Codable {
+    public init(flightPlanId: String, flightId: String, waypoints: [String], lastUpdate: String, flightPlanItems: [FlightPlan.FlightPlanItem]) {
+        self.flightPlanId = flightPlanId
+        self.flightId = flightId
+        self.waypoints = waypoints
+        self.lastUpdate = lastUpdate
+        self.flightPlanItems = flightPlanItems
+    }
+    
     public var flightPlanId: String
     public var flightId: String
     public var waypoints: [String]
@@ -69,6 +112,15 @@ public struct FlightPlan: Codable {
     public var flightPlanItems: [FlightPlanItem]
     
     public struct FlightPlanItem: Codable {
+        public init(name: String, type: Int, children: [FlightPlan.FlightPlanItem]? = nil, identifier: String? = nil, altitude: Int, location: FlightPlan.Coordinate) {
+            self.name = name
+            self.type = type
+            self.children = children
+            self.identifier = identifier
+            self.altitude = altitude
+            self.location = location
+        }
+        
         var name: String
         var type: Int
         var children: [FlightPlanItem]?
@@ -78,6 +130,11 @@ public struct FlightPlan: Codable {
     }
     
     public struct Coordinate: Codable {
+        public init(latitude: Float, longitude: Float) {
+            self.latitude = latitude
+            self.longitude = longitude
+        }
+        
         var latitude: Float
         var longitude: Float
     }
@@ -108,6 +165,18 @@ public extension FlightPlan.FlightPlanItem {
 //MARK: Get Active ATC Frequencies
 
 public struct ActiveAtcFacility: Codable {
+    public init(frequencyId: String, userId: String, username: String? = nil, virtualOrganization: String? = nil, airportName: String? = nil, type: Int, latitude: Float, longitude: Float, startTime: String) {
+        self.frequencyId = frequencyId
+        self.userId = userId
+        self.username = username
+        self.virtualOrganization = virtualOrganization
+        self.airportName = airportName
+        self.type = type
+        self.latitude = latitude
+        self.longitude = longitude
+        self.startTime = startTime
+    }
+    
     public var frequencyId: String
     public var userId: String
     public var username: String?
@@ -149,6 +218,25 @@ public extension ActiveAtcFacility {
 //MARK: Get User Stats
 
 public struct UserStats: Codable {
+    public init(onlineFlights: Int, violations: Int, xp: Int, landingCount: Int, flightTime: Int, atcOperations: Int, atcRank: Int? = nil, grade: Int, hash: String, violationCountByLevel: [String : Int], roles: [Int], userId: String, virtualOrganization: String? = nil, discourseUsername: String? = nil, groups: [String], errorCode: Int) {
+        self.onlineFlights = onlineFlights
+        self.violations = violations
+        self.xp = xp
+        self.landingCount = landingCount
+        self.flightTime = flightTime
+        self.atcOperations = atcOperations
+        self.atcRank = atcRank
+        self.grade = grade
+        self.hash = hash
+        self.violationCountByLevel = violationCountByLevel
+        self.roles = roles
+        self.userId = userId
+        self.virtualOrganization = virtualOrganization
+        self.discourseUsername = discourseUsername
+        self.groups = groups
+        self.errorCode = errorCode
+    }
+    
     public var onlineFlights: Int
     public var violations: Int
     public var xp: Int
@@ -187,6 +275,22 @@ public extension UserStats {
 //MARK: Get User Grade
 
 public struct GradeInfo: Codable {
+    public init(total12MonthsViolations: Int, gradeDetails: GradeInfo.GradeConfiguration, totalXP: Int, atcOperations: Int, atcRank: Int? = nil, lastLevel1ViolationDate: String, lastReportViolationDate: String, violationCountByLevel: [String : Int], roles: [String], userId: String, virtualOrganization: String? = nil, discourseUsername: String? = nil, errorCode: Int) {
+        self.total12MonthsViolations = total12MonthsViolations
+        self.gradeDetails = gradeDetails
+        self.totalXP = totalXP
+        self.atcOperations = atcOperations
+        self.atcRank = atcRank
+        self.lastLevel1ViolationDate = lastLevel1ViolationDate
+        self.lastReportViolationDate = lastReportViolationDate
+        self.violationCountByLevel = violationCountByLevel
+        self.roles = roles
+        self.userId = userId
+        self.virtualOrganization = virtualOrganization
+        self.discourseUsername = discourseUsername
+        self.errorCode = errorCode
+    }
+    
     public var total12MonthsViolations: Int
     public var gradeDetails: GradeConfiguration
     public var totalXP: Int
@@ -205,17 +309,40 @@ public struct GradeInfo: Codable {
     
     
     public struct GradeConfiguration: Codable {
+        public init(gradeIndex: Int, grades: [GradeInfo.GradeConfiguration.Grade], ruleDefinitions: [GradeInfo.GradeConfiguration.GradeRuleDefinition]) {
+            self.gradeIndex = gradeIndex
+            self.grades = grades
+            self.ruleDefinitions = ruleDefinitions
+        }
+        
         public var gradeIndex: Int
         public var grades: [Grade]
         public var ruleDefinitions: [GradeRuleDefinition]
         
         public struct Grade: Codable {
+            public init(rules: [GradeInfo.GradeConfiguration.Grade.GradeRule], index: Int, name: String, state: Int) {
+                self.rules = rules
+                self.index = index
+                self.name = name
+                self.state = state
+            }
+            
             public var rules: [GradeRule]
             public var index: Int
             public var name: String
             public var state: Int
             
             public struct GradeRule: Codable {
+                public init(ruleIndex: Int, referenceValue: Double, userValue: Double, state: Int, userValueString: String, referenceValueString: String, definition: GradeInfo.GradeConfiguration.GradeRuleDefinition) {
+                    self.ruleIndex = ruleIndex
+                    self.referenceValue = referenceValue
+                    self.userValue = userValue
+                    self.state = state
+                    self.userValueString = userValueString
+                    self.referenceValueString = referenceValueString
+                    self.definition = definition
+                }
+                
                 public var ruleIndex: Int
                 public var referenceValue: Double
                 public var userValue: Double
@@ -227,9 +354,20 @@ public struct GradeInfo: Codable {
         }
         
         public struct GradeRuleDefinition: Codable {
+            public init(name: String, description: String, property: String, `operator`: Int, period: Double, order: Int, group: Int) {
+                self.name = name
+                self.description = description
+                self.property = property
+                self.`operator` = `operator`
+                self.period = period
+                self.order = order
+                self.group = group
+            }
+            
             public var name: String
             public var description: String
             public var property: String
+            /// Be careful with this name, ```operator``` is a reserved word in swift. In case of any issues with it, surround it with one backtick on either sides..
             public var `operator`: Int
             public var period: Double
             public var order: Int
@@ -277,6 +415,15 @@ public extension GradeInfo {
 
 //MARK: Get Airport Status
 public struct AirportStatus: Codable {
+    public init(airportIcao: String, inboundFlightsCount: Int, inboundFlights: [String], outboundFlightsCount: Int, outboundFlights: [String], atcFacilities: [ActiveAtcFacility]) {
+        self.airportIcao = airportIcao
+        self.inboundFlightsCount = inboundFlightsCount
+        self.inboundFlights = inboundFlights
+        self.outboundFlightsCount = outboundFlightsCount
+        self.outboundFlights = outboundFlights
+        self.atcFacilities = atcFacilities
+    }
+    
     public var airportIcao: String
     public var inboundFlightsCount: Int
     public var inboundFlights: [String]
@@ -293,6 +440,15 @@ public struct AirportStatus: Codable {
 
 //MARK: Get Oceanic Tracks
 public struct OceanicTrack: Codable {
+    public init(name: String, path: [String], eastLevels: [Int]? = nil, westLevels: [Int]? = nil, type: String, lastSeen: String) {
+        self.name = name
+        self.path = path
+        self.eastLevels = eastLevels
+        self.westLevels = westLevels
+        self.type = type
+        self.lastSeen = lastSeen
+    }
+    
     public var name: String
     public var path: [String]
     public var eastLevels: [Int]?
