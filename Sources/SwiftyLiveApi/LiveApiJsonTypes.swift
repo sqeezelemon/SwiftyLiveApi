@@ -54,7 +54,7 @@ public struct PositionReport: Codable {
     
     public var wrappedDate: Date? {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return formatter.date(from: date)
     }
 }
@@ -86,7 +86,7 @@ public struct FlightPlan: Codable {
 public extension FlightPlan {
     var wrappedLastUpdate: Date? {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ssZ"
         return formatter.date(from: lastUpdate)
     }
 }
@@ -122,7 +122,7 @@ public struct ActiveAtcFacility: Codable {
 public extension ActiveAtcFacility {
     var wrappedStartTime: Date? {
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-MM-DD HH:mm:ssZ"
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ssZ"
         return formatter.date(from: startTime)
     }
     
@@ -304,7 +304,7 @@ public struct OceanicTrack: Codable {
 public extension OceanicTrack {
     var wrappedLastSeen: Date? {
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-MM-DD HH:mm:ssZ"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return formatter.date(from: lastSeen)
     }
 }
