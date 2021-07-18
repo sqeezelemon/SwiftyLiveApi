@@ -91,8 +91,6 @@ public class LiveApiClient {
         return data
     }
     
-    #warning("refreshServerIds() is not needed if you don't intend on using ServerId enum")
-    // Just delete the function and everything up to this warning if you don't intend on using ServerId
     /**
      Refresh server ids inside ServerId enum
      */
