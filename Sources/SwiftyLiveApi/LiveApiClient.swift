@@ -83,9 +83,10 @@ public class LiveApiClient {
     //MARK: Sessions
     
     /**
-     Returns all public Infinite Flight Servers
+     Returns all public Infinite Flight Servers and updates all sessionIds inside ```LiveServer``` accordingly. Discard the result if you only need to update sessionIds inside ```LiveServer```.
      - Returns: Returns an array of ```Session``` objects.
      */
+    @discardableResult
     public func getSessions() throws -> [Session] {
         let data: [Session] = try getJsonData(RequestPath.sessions)
         updateSessionIds(sessions: data)
