@@ -61,7 +61,18 @@ public class LiveApiClient {
             throw LiveApiClientError.invalidUrl
         }
         let data = try Data(contentsOf: requestUrl)
-        let jsonData = try jsonDecoder.decode(LiveApiResponseWrapper<T>.self, from: data)
+        
+        var jsonData: LiveApiResponseWrapper<T>!
+        do {
+            jsonData = try jsonDecoder.decode(LiveApiResponseWrapper<T>.self, from: data)
+        } catch {
+            if let codeFetcher = try? jsonDecoder.decode(LiveApiErrorCodeFetcher.self, from: data) {
+                let liveApiError = LiveApiError.init(rawValue: codeFetcher.errorCode) ?? .unknownErrorCode
+                throw liveApiError
+            } else {
+                throw error
+            }
+        }
         guard jsonData.errorCode == 0 else {
             throw LiveApiError.init(rawValue: jsonData.errorCode) ?? LiveApiError.unknownErrorCode
         }
@@ -216,7 +227,19 @@ public class LiveApiClient {
                 guard data != nil else {
                     throw LiveApiClientError.dataIsNil
                 }
-                let jsonData = try self.jsonDecoder.decode(LiveApiResponseWrapper<[UserStats]>.self, from: data!)
+                
+                
+                var jsonData: LiveApiResponseWrapper<[UserStats]>!
+                do {
+                    jsonData = try self.jsonDecoder.decode(LiveApiResponseWrapper<[UserStats]>.self, from: data!)
+                } catch {
+                    if let codeFetcher = try? self.jsonDecoder.decode(LiveApiErrorCodeFetcher.self, from: data!) {
+                        let liveApiError = LiveApiError.init(rawValue: codeFetcher.errorCode) ?? .unknownErrorCode
+                        throw liveApiError
+                    } else {
+                        throw error
+                    }
+                }
                 result = jsonData.result
                 
             } catch {
@@ -363,4 +386,9 @@ public enum LiveServer {
             return LiveServer.expertId
         }
     }
+}
+
+// For JSON decoding in case there is data, but it can't be decoded into LiveApiResponseWrapper<T>
+internal struct LiveApiErrorCodeFetcher: Codable {
+    var errorCode: Int
 }
