@@ -34,7 +34,7 @@ public class LiveApiClient {
     
     //MARK: Request limiter
     /**
-     Amount of requests per minute after which no further requests would be sent until a minute passes since last counter reset.
+     Amount of requests per minute after which no further requests would be sent until a minute passes since last request counter reset.
      - Warning: 100 requests per minute is the limit above which Cameron might ask you a few questions.
      */
     public var requestLimitPerMinute: Int
@@ -84,7 +84,7 @@ public class LiveApiClient {
     
     /**
      Returns all public Infinite Flight Servers
-     - Returns: Returns an array of Session objects or an empty array if something went wrong.
+     - Returns: Returns an array of ```Session``` objects.
      */
     public func getSessions() throws -> [Session] {
         let data: [Session] = try getJsonData(RequestPath.sessions)
@@ -138,7 +138,7 @@ public class LiveApiClient {
     /**
      Retrieve a list of all flights for a session.
      - Parameter sessionId: Session (Server) ID of the Live Server.
-     - Returns: Returns an array of Flight objects or an empty array if something went wrong.
+     - Returns: Returns an array of ```Flight``` objects.
      */
     public func getFlights(_ sessionId: String) throws -> [Flight] {
         let data: [Flight] = try getJsonData(RequestPath.flights(sessionId))
@@ -150,7 +150,7 @@ public class LiveApiClient {
      Retrieve the flown route of a specific flight with position, altitude, speed and track information at different points in time.
      - Warning: Please note, this is currently only supported on the Expert Server and Training Server.
      - Parameter flightId: ID of the flight. The flight must be in an active session.
-     - Returns: Returns an array of PositionReport objects or an empty array if something went wrong.
+     - Returns: Returns an array of ```PositionReport``` objects.
      */
     public func getFlightRoute(_ flightId: String) throws -> [PositionReport] {
         let data: [PositionReport] = try getJsonData(RequestPath.flightRoute(flightId))
@@ -161,7 +161,7 @@ public class LiveApiClient {
     /**
      Retrieve the flight plan for a specific active flight.
      - Parameter flightId: ID of the flight. The flight must be in an active session.
-     - Returns: Returns an optional FlightPlan object or nil if something went wrong.
+     - Returns: Returns a ```FlightPlan``` object.
      */
     public func getFlightPlan(_ flightId: String) throws -> FlightPlan {
         let data: FlightPlan = try getJsonData(RequestPath.flightPlan(flightId))
@@ -172,7 +172,7 @@ public class LiveApiClient {
     /**
      Retrieve active Air Traffic Control frequencies for a session.
      - Parameter sessionId: Session (Server) ID of the Live Server.
-     - Returns: Returns an array of ActiveAtcFacility objects or an empty array if something went wrong.
+     - Returns: Returns an array of ```ActiveAtcFacility``` objects.
      */
     public func getActiveAtc(_ sessionId: String) throws -> [ActiveAtcFacility] {
         let data: [ActiveAtcFacility] = try getJsonData(RequestPath.activeAtc(sessionId))
@@ -187,7 +187,7 @@ public class LiveApiClient {
        - discourseNames: An array of IFC Usernames. Not case sensitive.
        - userHashes: An array of user hashes retrieved in-app or from another endpoint. All letters must be upper case.
      - Warning: At least one array has to have data Requesting data on more than 25 users at a time will result in an error.
-     - Returns: Returns an array of UserStats objects.
+     - Returns: Returns an array of ```UserStats``` objects.
      - Note: If you need a more detailed Grade table, consider using getUserGrade
      */
     public func getUserStats(userIds: [String] = [], discourseNames: [String] = [], userHashes: [String] = []) throws -> [UserStats] {
@@ -281,7 +281,7 @@ public class LiveApiClient {
     /**
      Retrieve the full grade table and detailed statistics for a user.
      - Parameter userId: ID of the User
-     - Returns: Returns an optional GradeInfo object or nil if something went wrong.
+     - Returns: Returns a ```GradeInfo``` object.
      - Note: if you don't need grade table, consider using getUserStats instead.
      */
     
@@ -295,10 +295,10 @@ public class LiveApiClient {
      Retrieve the ATIS for an airport on a specific server if it is active.
      - Parameters:
        - icao: ICAO of the airport to get the ATIS for
-       - sessionId: Session (Server) ID of the Live Server
-     - Returns: Returns an optional String or nil if something went wrong.
+       - sessionId: Session (Server) ID of the Live Server. Defaults to the expert server sessionId from ```LiveServer``` enum if not provided since ATIS doesn't exist on the other servers.
+     - Returns: Returns ATIS as ```String```.
      */
-    public func getAirportAtis(icao: String, sessionId: String) throws -> String {
+    public func getAirportAtis(icao: String, sessionId: String = LiveServer.expert.id) throws -> String {
         let data: String = try getJsonData(RequestPath.airportAtis(icao, serverId: sessionId))
         return data
     }
@@ -309,7 +309,7 @@ public class LiveApiClient {
      - Parameters:
        - icao: ICAO of the airport to get the Status for
        - sessionId: Session (Server) ID of the Live Server
-     - Returns: Returns a noptional AirportStatus object or nil if something went wrong.
+     - Returns: Returns an ```AirportStatus``` object.
      */
     public func getAirportStatus(icao: String, sessionId: String) throws -> AirportStatus {
         let data: AirportStatus = try getJsonData(RequestPath.airportStatus(icao, serverId: sessionId))
@@ -320,7 +320,7 @@ public class LiveApiClient {
     /**
      Retrieve active ATC status information and inbound/outbound aircraft information for all airports with activity on a specific server.
      - Parameter sessionId: Session (Server) ID of the Live Server
-     - Returns: Returns an array of AirportStatus objects or an empty array if something went wrong.
+     - Returns: Returns an array of ```AirportStatus``` objects.
      */
     public func getWorldStatus(_ sessionId: String) throws -> [AirportStatus] {
         let data: [AirportStatus] = try getJsonData(RequestPath.worldStatus(sessionId))
@@ -330,7 +330,7 @@ public class LiveApiClient {
     //MARK: Get Oceanic tracks
     /**
      Retrieves a list of Oceanic Tracks active in Infinite Flight multiplayer sessions.
-     - Returns: Returns an array of OceanicTrack objects or an empty array if something went wrong.
+     - Returns: Returns an array of ```OceanicTrack``` objects.
      */
     public func getOceanicTracks() throws -> [OceanicTrack] {
         let data: [OceanicTrack] = try getJsonData(RequestPath.oceanicTracks)
@@ -389,6 +389,7 @@ public class LiveApiClient {
     }
 }
 
+///enum that contains ```sessionId```s of servers for your convenience. Automatically fills when ```getSessions``` is called without errors, but can also be filled manually using ```updateSessionIds(sessions: [Session])```.
 public enum LiveServer {
     static internal var expertId = ""
     static internal var trainingId = ""
@@ -396,6 +397,7 @@ public enum LiveServer {
     
     case training, expert, casual
     
+    /// identifier for the current ```LiveServer``` enum case. Automatically fills when ```getSessions``` is called without errors, but can also be filled manually using ```updateSessionIds(sessions: [Session])```.
     public var id: String {
         switch self {
         case .casual:
