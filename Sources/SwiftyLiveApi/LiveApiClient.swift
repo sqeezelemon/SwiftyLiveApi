@@ -411,6 +411,34 @@ public enum LiveServer {
     }
 }
 
+@available(*, deprecated, message: "Please use LiveServer instead. For example, ServerId.expert is now LiveServer.expert.id")
+public enum ServerId {
+    static var expert: String {
+        get {
+            return LiveServer.expertId
+        }
+        set {
+            LiveServer.expertId = newValue
+        }
+    }
+    static var training: String {
+        get {
+            return LiveServer.trainingId
+        }
+        set {
+            LiveServer.trainingId = newValue
+        }
+    }
+    static var casual: String {
+        get {
+            return LiveServer.casualId
+        }
+        set {
+            LiveServer.casualId = newValue
+        }
+    }
+}
+
 // For JSON decoding in case there is data, but it can't be decoded into LiveApiResponseWrapper<T>
 internal struct LiveApiErrorCodeFetcher: Codable {
     var errorCode: Int
