@@ -202,23 +202,25 @@ public class LiveApiClient {
     
     //MARK: Get User Stats
     /**
-     Retrieve user statistics for multiple users, including their grade, flight time and username.
+     Retrieve user statistics for up to 25 users, including their grade, flight time and username.
      - Parameters:
        - userIds: An array of user ID strings retrieved from another endpoint
        - discourseNames: An array of IFC Usernames. Not case sensitive.
        - userHashes: An array of user hashes retrieved in-app or from another endpoint. All letters must be upper case.
-     - Warning: At least one array has to have data Requesting data on more than 25 users at a time will result in an error.
+       - validateInput: Whether the input should be validated for having more than 25 items or for having no items. Defaults to `true`.
      - Returns: Returns an array of ```UserStats``` objects.
      - Note: If you need a more detailed Grade table, consider using getUserGrade
      */
-    public func getUserStats(userIds: [String] = [], discourseNames: [String] = [], userHashes: [String] = []) throws -> [UserStats] {
+    public func getUserStats(userIds: [String] = [], discourseNames: [String] = [], userHashes: [String] = [], validateInput: Bool = true) throws -> [UserStats] {
         
-        let usersCount = userIds.count + discourseNames.count + userHashes.count
-        guard usersCount <= 25 else {
-            throw LiveApiClientError.tooManyUsers
-        }
-        guard usersCount > 0 else {
-            throw LiveApiClientError.emptyrequestParameters
+        if validateInput {
+            let usersCount = userIds.count + discourseNames.count + userHashes.count
+            guard usersCount <= 25 else {
+                throw LiveApiClientError.tooManyUsers
+            }
+            guard usersCount > 0 else {
+                throw LiveApiClientError.emptyrequestParameters
+            }
         }
         
         requestsThisMinute += 1
