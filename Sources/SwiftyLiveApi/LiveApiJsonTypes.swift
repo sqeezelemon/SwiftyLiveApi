@@ -490,23 +490,28 @@ public enum GradeState: Int {
     case warning = 2
 }
 
-//MARK: Error Code types
+//MARK: LiveAPI error
 
-public enum LiveApiError: Int, Error {
-    case ok = 0
-    case userNotFound = 1
-    case missingRequestParameters = 2
-    case endpointError = 3
-    case notAuthorized = 4
-    case serverNotFound = 5
-    case flightNotFound = 6
-    case noAtisAvailable = 7
-    
-    // Error just in case
-    case unknownErrorCode = 404
+@available(*, deprecated, renamed: "LiveApiClient.LiveApiError")
+typealias LiveApiError = LiveApiClient.LiveApiError
+
+extension LiveApiClient {
+    public enum LiveApiError: Int, Error {
+        case ok = 0
+        case userNotFound = 1
+        case missingRequestParameters = 2
+        case endpointError = 3
+        case notAuthorized = 4
+        case serverNotFound = 5
+        case flightNotFound = 6
+        case noAtisAvailable = 7
+        
+        // Error just in case
+        case unknownErrorCode = 404
+    }
 }
 
-extension LiveApiError: LocalizedError {
+extension LiveApiClient.LiveApiError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .ok:
@@ -527,6 +532,37 @@ extension LiveApiError: LocalizedError {
             return "ERROR CODE 7: No Atis Available"
         case .unknownErrorCode:
             return "Unknown LiveAPI Error Code"
+        }
+    }
+}
+
+//MARK: Client errors
+extension LiveApiClient {
+    public enum LiveApiClientError: String, Error {
+        case requestLimitReached = "Reached request limit"
+        case dataIsNil = "Data returned nil"
+        case tooManyUsers = "Request contained too much items (25 items max)"
+        case failedToEncodeRequestBody = "Failed to encode request body"
+        case emptyrequestParameters = "All of the request parameters were empty"
+        case invalidUrl = "Request URL is invalid"
+    }
+}
+
+extension LiveApiClient.LiveApiClientError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .dataIsNil:
+            return "Data returned nil"
+        case .requestLimitReached:
+            return "Request limit reached"
+        case .tooManyUsers:
+            return "Too many users (max 25)"
+        case .failedToEncodeRequestBody:
+            return "Failed to encode request body"
+        case .emptyrequestParameters:
+            return "All request parameters are empty"
+        case .invalidUrl:
+            return "Request URL is invalid"
         }
     }
 }

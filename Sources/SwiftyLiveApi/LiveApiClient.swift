@@ -435,16 +435,6 @@ public class LiveApiClient {
         
         static let oceanicTracks = "/public/v2/tracks"
     }
-    
-    //MARK: Custom errors
-    public enum LiveApiClientError: String, Error {
-        case requestLimitReached = "Reached request limit"
-        case dataIsNil = "Data returned nil"
-        case tooManyUsers = "Request contained too much items (25 items max)"
-        case failedToEncodeRequestBody = "Failed to encode request body"
-        case emptyrequestParameters = "All of the request parameters were empty"
-        case invalidUrl = "Request URL is invalid"
-    }
 }
 
 ///enum that contains ```sessionId```s of servers for your convenience. Automatically fills when ```getSessions``` is called without errors, but can also be filled manually using ```updateSessionIds(sessions: [Session])```.
