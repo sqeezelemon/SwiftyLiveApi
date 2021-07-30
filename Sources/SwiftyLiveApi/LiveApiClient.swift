@@ -400,13 +400,25 @@ public enum LiveServer {
     
     /// identifier for the current ```LiveServer``` enum case. Automatically fills when ```getSessions``` is called without errors, but can also be filled manually using ```updateSessionIds(sessions: [Session])```.
     public var id: String {
-        switch self {
-        case .casual:
-            return LiveServer.casualId
-        case .training:
-            return LiveServer.trainingId
-        case .expert:
-            return LiveServer.expertId
+        get {
+            switch self {
+            case .casual:
+                return LiveServer.casualId
+            case .training:
+                return LiveServer.trainingId
+            case .expert:
+                return LiveServer.expertId
+            }
+        }
+        set {
+            switch self {
+            case .casual:
+                LiveServer.casualId = newValue
+            case .training:
+                LiveServer.trainingId = newValue
+            case .expert:
+                LiveServer.expertId = newValue
+            }
         }
     }
 }
