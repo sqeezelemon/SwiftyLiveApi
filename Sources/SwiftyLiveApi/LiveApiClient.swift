@@ -146,6 +146,16 @@ public class LiveApiClient {
         return data
     }
     
+    /**
+     Retrieve a list of all flights for a session.
+     - Parameter server: A LiveServer case whose `LiveServer.id` property will be used to get `sessionId`.
+     - Returns: Returns an array of ```Flight``` objects.
+     */
+    public func getFlights(_ server: LiveServer) throws -> [Flight] {
+        let data: [Flight] = try getJsonData(RequestPath.flights(server.id))
+        return data
+    }
+    
     //MARK: Get Flight Route
     /**
      Retrieve the flown route of a specific flight with position, altitude, speed and track information at different points in time.
@@ -177,6 +187,16 @@ public class LiveApiClient {
      */
     public func getActiveAtc(_ sessionId: String) throws -> [ActiveAtcFacility] {
         let data: [ActiveAtcFacility] = try getJsonData(RequestPath.activeAtc(sessionId))
+        return data
+    }
+    
+    /**
+     Retrieve active Air Traffic Control frequencies for a session.
+     - Parameter server: A LiveServer case whose `LiveServer.id` property will be used to get `sessionId`.
+     - Returns: Returns an array of ```ActiveAtcFacility``` objects.
+     */
+    public func getActiveAtc(_ server: LiveServer) throws -> [ActiveAtcFacility] {
+        let data: [ActiveAtcFacility] = try getJsonData(RequestPath.activeAtc(server.id))
         return data
     }
     
@@ -304,6 +324,19 @@ public class LiveApiClient {
         return data
     }
     
+    /**
+     Retrieve the ATIS for an airport on a specific server if it is active.
+     - Parameters:
+       - icao: ICAO of the airport to get the ATIS for
+       - server: A LiveServer case whose `LiveServer.id` property will be used to get `sessionId`.
+     - Returns: Returns ATIS as ```String```.
+     */
+    public func getAirportAtis(icao: String, server: LiveServer) throws -> String {
+        // LiveServer doesn't default here because that is already handled by the main method
+        let data: String = try getJsonData(RequestPath.airportAtis(icao, serverId: server.id))
+        return data
+    }
+    
     //MARK: Get Airport Status
     /**
      Retrieve active ATC status information for an airport, and the number of inbound and outbound aircraft.
@@ -317,6 +350,18 @@ public class LiveApiClient {
         return data
     }
     
+    /**
+     Retrieve active ATC status information for an airport, and the number of inbound and outbound aircraft.
+     - Parameters:
+       - icao: ICAO of the airport to get the Status for
+       - server: A LiveServer case whose `LiveServer.id` property will be used to get `sessionId`.
+     - Returns: Returns an ```AirportStatus``` object.
+     */
+    public func getAirportStatus(icao: String, server: LiveServer) throws -> AirportStatus {
+        let data: AirportStatus = try getJsonData(RequestPath.airportStatus(icao, serverId: server.id))
+        return data
+    }
+    
     //MARK: Get world status
     /**
      Retrieve active ATC status information and inbound/outbound aircraft information for all airports with activity on a specific server.
@@ -325,6 +370,16 @@ public class LiveApiClient {
      */
     public func getWorldStatus(_ sessionId: String) throws -> [AirportStatus] {
         let data: [AirportStatus] = try getJsonData(RequestPath.worldStatus(sessionId))
+        return data
+    }
+    
+    /**
+     Retrieve active ATC status information and inbound/outbound aircraft information for all airports with activity on a specific server.
+     - Parameter server: A LiveServer case whose `LiveServer.id` property will be used to get `sessionId`.
+     - Returns: Returns an array of ```AirportStatus``` objects.
+     */
+    public func getWorldStatus(_ server: LiveServer) throws -> [AirportStatus] {
+        let data: [AirportStatus] = try getJsonData(RequestPath.worldStatus(server.id))
         return data
     }
     
