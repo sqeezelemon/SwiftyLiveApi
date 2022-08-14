@@ -1,3 +1,5 @@
+> ❗️This is a WIP branch that may break at any time, for now, use `main`.
+
 # SwiftyLiveApi
 
 SwiftyLiveApi is a simple package to work with Infinite Flight Live API. It features support for all available endpoints, safety mechanisms against exceeding request limits, Live API error types, beautiful documentation right in XCode and support up to Swift 3.
