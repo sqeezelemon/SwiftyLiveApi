@@ -34,11 +34,10 @@ public struct LAAtcFrequency: Decodable {
         virtualOrganization = try values.decode(String?.self, forKey: .virtualOrganization)
         startTime = try values.decode(Date.self, forKey: .startTime)
         
-        facility = LAAtcFacility(id: "", icao: nil, type: .undocumented, latitude: 0, longitude: 0)
-        facility.id = try values.decode(String.self, forKey: .frequencyId)
-        facility.icao = try values.decode(String?.self, forKey: .frequencyId)
-        facility.type = try values.decode(LAFacilityType.self, forKey: .type)
-        facility.latitude = try values.decode(Double.self, forKey: .latitude)
-        facility.longitude = try values.decode(Double.self, forKey: .longitude)
+        facility = LAAtcFacility(id: try values.decode(String.self, forKey: .frequencyId),
+                                 icao: try values.decode(String?.self, forKey: .frequencyId),
+                                 type: try values.decode(LAFacilityType.self, forKey: .type),
+                                 latitude: try values.decode(Double.self, forKey: .latitude),
+                                 longitude: try values.decode(Double.self, forKey: .longitude))
     }
 }
