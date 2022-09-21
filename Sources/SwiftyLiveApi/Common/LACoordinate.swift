@@ -13,7 +13,9 @@ public struct LACoordinate: Decodable {
         self.longitude = longitude
         self.altitude = altitude
     }
+    /// Latitude of the object.
     public var latitude: Double
+    /// Longitude of the object.
     public var longitude: Double
     /// Altitude in feet.
     public var altitude: Double

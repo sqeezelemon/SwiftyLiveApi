@@ -16,10 +16,15 @@ public struct LAAtcFrequency: Decodable {
         self.startTime = startTime
     }
     
+    /// Information about the facility.
     public var facility: LAAtcFacility
+    /// Unique identifier of the user controlling the frequency.
     public var userId: String
+    /// User's forum username, `nil` if not linked or anonymous.
     public var username: String?
+    /// User's forum VA/VO, `nil` if not linked, not set or anonymous.
     public var virtualOrganization: String?
+    /// Time at which the frequency was opened.
     public var startTime: Date
     
     enum CodingKeys: String, CodingKey {
