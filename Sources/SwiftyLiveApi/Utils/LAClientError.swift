@@ -9,4 +9,5 @@ import Foundation
 public enum LAClientError: Error {
     case dataIsNil
     case urlIsNil
+    case dateIsNil
 }
