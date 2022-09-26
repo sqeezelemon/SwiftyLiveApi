@@ -116,7 +116,6 @@ public final class LAClient {
     public func getFlights(_ sessionId: String) throws -> [LAFlight] {
         urlComponents.path = "/public/v2/sessions/\(sessionId)/flights"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
@@ -129,7 +128,6 @@ public final class LAClient {
                                _ flightId: String) throws -> [LAPositionReport] {
         urlComponents.path = "/public/v2/sessions/\(sessionId)/flights/\(flightId)/route"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
@@ -142,7 +140,6 @@ public final class LAClient {
                               _ flightId: String) throws -> [LAPositionReport] {
         urlComponents.path = "/public/v2/sessions/\(sessionId)/flights/\(flightId)/route"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
@@ -152,7 +149,6 @@ public final class LAClient {
     public func getActiveAtc(_ sessionId: String) throws -> [LAAtcFrequency] {
         urlComponents.path = "/public/v2/sessions/\(sessionId)/atc"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
@@ -185,7 +181,6 @@ public final class LAClient {
     public func getUserGrade(_ userId: String) throws -> LAUserGrade {
         urlComponents.path = "/public/v2/users/\(userId)"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
@@ -210,7 +205,6 @@ public final class LAClient {
                                  _ icao: String) throws -> LAAirportStatus {
         urlComponents.path = "/public/v2/sessions/\(sessionId)/airport/\(icao)/status"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
@@ -222,7 +216,6 @@ public final class LAClient {
     public func getWorldStatus(_ sessionId: String) throws -> [LAAirportStatus] {
         urlComponents.path = "/public/v2/sessions/\(sessionId)/world"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
@@ -230,7 +223,6 @@ public final class LAClient {
     public func getTracks() throws -> [LATrack] {
         urlComponents.path = "/public/v2/tracks"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
@@ -246,7 +238,6 @@ public final class LAClient {
                                                       value: "\(page)"))
         compsCopy.path = "/public/v2/users/\(userId)/flights"
         guard let url = compsCopy.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
@@ -275,7 +266,6 @@ public final class LAClient {
                                                       value: "\(page)"))
         compsCopy.path = "/public/v2/users/\(userId)/atc"
         guard let url = compsCopy.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
@@ -288,7 +278,6 @@ public final class LAClient {
                                   _ atcSessionId: String) throws -> LALogbookAtcSession {
         urlComponents.path = "/public/v2/users/\(userId)/atc/\(atcSessionId)"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
@@ -298,7 +287,6 @@ public final class LAClient {
     public func getNotams(_ sessionId: String) throws -> [LANotam] {
         urlComponents.path = "/public/v2/sessions/\(sessionId)/notams"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
-        //TODO: Date decoding
         return try fetch(with: url)
     }
     
