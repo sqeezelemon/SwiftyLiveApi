@@ -28,5 +28,20 @@ public struct LATrack: Decodable {
     /// type of track, i.e. `"North Atlantic Tracks"`
     public var type: String
     /// last time the track was updated.
+    @LADate
     public var lastSeen: Date
+    
+    private enum CodingKeys: CodingKey {
+        case name, path, eastLevels, westLevels, type, lastSeen
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        name = try values.decode(String.self, forKey: .name)
+        path = try values.decode([String].self, forKey: .path)
+        eastLevels = (try? values.decode([Int].self, forKey: .eastLevels)) ?? []
+        westLevels = (try? values.decode([Int].self, forKey: .westLevels)) ?? []
+        type = try values.decode(String.self, forKey: .type)
+        _lastSeen = try values.decode(LADate.self, forKey: .lastSeen)
+    }
 }
