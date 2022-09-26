@@ -25,6 +25,7 @@ public struct LAAtcFrequency: Decodable {
     /// User's forum VA/VO, `nil` if not linked, not set or anonymous.
     public var virtualOrganization: String?
     /// Time at which the frequency was opened.
+    @LADate
     public var startTime: Date
     
     enum CodingKeys: String, CodingKey {

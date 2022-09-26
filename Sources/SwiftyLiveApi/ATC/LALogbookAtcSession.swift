@@ -25,8 +25,10 @@ public struct LALogbookAtcSession: Decodable {
     /// Information about the facility.
     public var facility: LAAtcFacility
     /// Time at which the frequency was opened.
+    @LADate
     public var created: Date
     /// Time at which the last report was received.
+    @LADate
     public var updated: Date
     /// Operations earned during the session.
     public var operations: Int

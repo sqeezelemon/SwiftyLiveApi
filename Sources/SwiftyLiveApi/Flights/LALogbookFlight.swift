@@ -28,6 +28,7 @@ public struct LALogbookFlight: Decodable {
     /// Unique id of the flight.
     public var flightId: String
     /// Time the flight was created.
+    @LADate
     public var created: Date
     /// Unique ID of the user who flew the flight.
     public var userId: String

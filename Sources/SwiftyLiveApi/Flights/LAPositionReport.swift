@@ -22,6 +22,7 @@ public struct LAPositionReport: Decodable {
     /// Aircraft ground speed at the time of the report in knots.
     public var groundSpeed: Double
     /// Time of the report.
+    @LADate
     public var date: Date
     
     private enum CodingKeys: CodingKey {
@@ -35,6 +36,6 @@ public struct LAPositionReport: Decodable {
                                 altitude: try values.decode(Double.self, forKey: .altitude))
         track = try values.decode(Double.self, forKey: .track)
         groundSpeed = try values.decode(Double.self, forKey: .groundSpeed)
-        date = try values.decode(Date.self, forKey: .date)
+        _date = try values.decode(LADate.self, forKey: .date)
     }
 }

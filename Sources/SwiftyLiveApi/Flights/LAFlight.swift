@@ -49,6 +49,7 @@ public struct LAFlight: Decodable {
     /// Current heading of the aircraft in degrees.
     public var heading: Float
     /// Last position report time.
+    @LADate
     public var lastReport: Date
     
     private enum CodingKeys: CodingKey {

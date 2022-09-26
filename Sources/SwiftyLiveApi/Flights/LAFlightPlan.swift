@@ -23,6 +23,7 @@ public struct LAFlightPlan: Decodable {
     /// Waypoint names for the flight. **Deprecated**
     public var waypoints: [String]
     /// Last time the flightplan was reported to the server.
+    @LADate
     public var lastUpdate: Date
     /// Waypoints and procedures making up the flightplan.
     public var flightPlanItems: [LAFlightPlanItem]

@@ -89,9 +89,9 @@ public struct LAUserGrade: Decodable {
         atcOperations = try values.decode(Int.self, forKey: .atcOperations)
         atcRank = try values.decode(LAAtcRank.self, forKey: .atcRank)
         violationsLast12Months = try values.decode(Int.self, forKey: .violationsLast12Months)
-        lastLevel1Violation = try? values.decode(Date.self, forKey: .lastLevel1Violation)
-        lastLevel2Violation = try? values.decode(Date.self, forKey: .lastLevel2Violation)
-        lastLevel3Violation = try? values.decode(Date.self, forKey: .lastLevel3Violation)
-        lastReport = try? values.decode(Date.self, forKey: .lastReport)
+        lastLevel1Violation = try? values.decode(LADate.self, forKey: .lastLevel1Violation).wrappedValue
+        lastLevel2Violation = try? values.decode(LADate.self, forKey: .lastLevel2Violation).wrappedValue
+        lastLevel3Violation = try? values.decode(LADate.self, forKey: .lastLevel3Violation).wrappedValue
+        lastReport = try? values.decode(LADate.self, forKey: .lastReport).wrappedValue
     }
 }
