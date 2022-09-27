@@ -308,7 +308,7 @@ public final class LAClient {
     
     /// Retrieves all liveries available in the latest Infinite Flight version.
     public func getLiveries() throws -> [LALivery] {
-        urlComponents.path = "/public/v2/liveries"
+        urlComponents.path = "/public/v2/aircraft/liveries"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
         return try fetch(with: url)
     }
