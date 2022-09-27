@@ -31,9 +31,8 @@ public struct LALivery: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
-        self.aircraft = LAAircraft(id: "", name: "")
-        self.aircraft.id = try container.decode(String.self, forKey: .aircraftID)
-        self.aircraft.name = try container.decode(String.self, forKey: .aircraftName)
+        self.aircraft = LAAircraft(id: try container.decode(String.self, forKey: .aircraftID),
+                                   name: try container.decode(String.self, forKey: .aircraftName))
         self.name = try container.decode(String.self, forKey: .liveryName)
     }
 }
