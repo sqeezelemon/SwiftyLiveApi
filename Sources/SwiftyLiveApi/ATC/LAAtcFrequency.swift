@@ -38,7 +38,7 @@ public struct LAAtcFrequency: Decodable {
         userId = try values.decode(String.self, forKey: .userId)
         username = try values.decode(String?.self, forKey: .username)
         virtualOrganization = try values.decode(String?.self, forKey: .virtualOrganization)
-        startTime = try values.decode(Date.self, forKey: .startTime)
+        _startTime = try values.decode(LADate.self, forKey: .startTime)
         
         facility = LAAtcFacility(id: try values.decode(String.self, forKey: .frequencyId),
                                  icao: try values.decode(String?.self, forKey: .frequencyId),

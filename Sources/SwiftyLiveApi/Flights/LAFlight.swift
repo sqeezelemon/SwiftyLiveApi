@@ -72,6 +72,6 @@ public struct LAFlight: Decodable {
         verticalSpeed = try values.decode(Double.self, forKey: .verticalSpeed)
         track = try values.decode(Double.self, forKey: .track)
         heading = try values.decode(Float.self, forKey: .heading)
-        lastReport = try values.decode(Date.self, forKey: .lastReport)
+        _lastReport = try values.decode(LADate.self, forKey: .lastReport)
     }
 }
