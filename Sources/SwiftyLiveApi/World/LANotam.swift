@@ -50,7 +50,9 @@ public struct LANotam: Decodable {
     /// Highest altitude of NOTAM in feet
     public var ceiling: Int
     /// Time at which the NOTAM comes into effect.
+    @LADate
     public var startTime: Date
     /// Time at which the NOTAM expires.
+    @LADate
     public var endTime: Date
 }
