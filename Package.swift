@@ -27,6 +27,8 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "SwiftyLiveApiTests",
-            dependencies: ["SwiftyLiveApi"]),
+            dependencies: ["SwiftyLiveApi"],
+            path: "Tests/SwiftyLiveApiTests",
+            resources: [.process("apikey.txt")]),
     ]
 )
