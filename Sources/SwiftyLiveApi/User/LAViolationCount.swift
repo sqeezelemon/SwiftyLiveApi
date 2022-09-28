@@ -50,7 +50,7 @@ public struct LAViolationCount: Decodable {
         }
     }
     
-    public enum CodingLeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case lvl1 = "level1"
         case lvl2 = "level2"
         case lvl3 = "level3"
