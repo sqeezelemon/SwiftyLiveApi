@@ -68,7 +68,7 @@ public struct LAUserStats: Decodable {
         case userId, virtualOrganization
         case username = "discourseUsername"
         case roles, onlineFlights, violations
-        case violationsByLevel = "violationsCountByLevel"
+        case violationsByLevel = "violationCountByLevel"
         case xp, landingCount, flightTime, atcOperations, atcRank, grade, hash
     }
 }

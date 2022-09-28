@@ -165,12 +165,11 @@ public final class LAClient {
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let json: [String : [String]] = [
-            "userIds" : userIds,
-            "usernames" : usernames,
-            "userHashes" : userHashes
-        ]
-        let data = try JSONSerialization.data(withJSONObject: json, options: [])
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let json = LAUserStatsRequest(userIds: userIds,
+                                      usernames: usernames,
+                                      userHashes: userHashes)
+        let data = try JSONEncoder().encode(json)
         request.httpBody = data
         return try fetch(with: request)
     }
