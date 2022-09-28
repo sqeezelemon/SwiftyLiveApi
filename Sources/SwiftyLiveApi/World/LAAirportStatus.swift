@@ -29,7 +29,7 @@ public struct LAAirportStatus: Decodable {
     /// Active ATC facilities at the airport.
     public var activeAtc: [LAAtcFrequency]
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case icao = "airportIcao"
         case inboundsCount = "inboundFlightsCount"
         case inbounds = "inboundFlights"

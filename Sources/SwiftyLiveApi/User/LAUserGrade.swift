@@ -65,9 +65,11 @@ public struct LAUserGrade: Decodable {
     public var lastReport: Date?
     
     private enum CodingKeys: String, CodingKey {
-        case userId, virtualOrganization, username, roles
+        case userId, virtualOrganization
+        case username = "discourseUsername"
+        case roles
         case gradeTable = "gradeDetails"
-        case violationsByLevel = "violationsCountByLevel"
+        case violationsByLevel = "violationCountByLevel"
         case xp = "totalXP"
         case atcOperations, atcRank
         case violationsLast12Months = "total12MonthsViolations"

@@ -8,8 +8,8 @@ import Foundation
 
 /// A logged flight.
 public struct LALogbookFlight: Decodable {
-    public init(flightId: String, created: Date, userId: String, aircraftId: String, liveryId: String? = nil, callsign: String, server: String, dayTime: Float, nightTime: Float, totalTime: Float, landingCount: Int, origin: String, destination: String, xp: Int) {
-        self.flightId = flightId
+    public init(id: String, created: Date, userId: String, aircraftId: String, liveryId: String? = nil, callsign: String, server: String, dayTime: Float, nightTime: Float, totalTime: Float, landingCount: Int, origin: String, destination: String, xp: Int) {
+        self.id = id
         self.created = created
         self.userId = userId
         self.aircraftId = aircraftId
@@ -26,7 +26,7 @@ public struct LALogbookFlight: Decodable {
     }
     
     /// Unique id of the flight.
-    public var flightId: String
+    public var id: String
     /// Time the flight was created.
     @LADate
     public var created: Date
@@ -49,15 +49,14 @@ public struct LALogbookFlight: Decodable {
     /// Number of landings conducted during the flight.
     public var landingCount: Int
     /// ICAO of the origin airport.
-    public var origin: String
+    public var origin: String?
     /// ICAO of the destination airport.
-    public var destination: String
+    public var destination: String?
     /// XP earned during the flight.
     public var xp: Int
     
     private enum CodingKeys: String, CodingKey {
-        case flightId = "id"
-        case created, userId, aircraftId, liveryId, callsign, server, dayTime, nightTime, totalTime, landingCount
+        case id, created, userId, aircraftId, liveryId, callsign, server, dayTime, nightTime, totalTime, landingCount
         case origin = "originAirport"
         case destination = "destinationAirport"
         case xp
