@@ -231,7 +231,7 @@ public final class LAClient {
     ///   - userId: ID of the user.
     ///   - page: The logbook page to fetch. Defaults to `1`.
     public func getUserFlights(_ userId: String,
-                               _ page: Int = 1) throws -> LALogbookPage<LALogbookFlight> {
+                               _ page: Int = 1) throws -> LAFlightLogbookPage {
         var compsCopy = urlComponents
         compsCopy.queryItems?.append(URLQueryItem(name: "page",
                                                       value: "\(page)"))
@@ -259,7 +259,7 @@ public final class LAClient {
     ///   - userId: ID of the user.
     ///   - page: The logbook page to fetch. Defaults to `1`.
     public func getUserAtcSessions(_ userId: String,
-                                   _ page: Int = 1) throws -> LALogbookPage<LALogbookAtcSession> {
+                                   _ page: Int = 1) throws -> LAAtcLogbookPage {
         var compsCopy = urlComponents
         compsCopy.queryItems?.append(URLQueryItem(name: "page",
                                                       value: "\(page)"))

@@ -35,3 +35,6 @@ public struct LALogbookAtcSession: Decodable {
     /// Total time on the frequency, in minutes.
     public var totalTime: Double
 }
+
+/// A page from the ATC logbook.
+public typealias LAAtcLogbookPage = LALogbookPage<LALogbookAtcSession>

@@ -154,7 +154,7 @@ final class NetworkingTests: XCTestCase {
         XCTAssertNotEqual(flights.count, 0, "Test can't be ran with 0 flights")
         let flight = flights.first { $0.position.altitude > 30000 } ?? flights.randomElement()!
         
-        var logbook: LALogbookPage<LALogbookFlight>!
+        var logbook: LAFlightLogbookPage!
         XCTAssertNoThrow(logbook = try client.getUserFlights(flight.userId))
         XCTAssertNotEqual(logbook.data.count, 0, "Test can't be ran with 0 flights")
         let logbookFlight = logbook.data.randomElement()!
@@ -188,7 +188,7 @@ final class NetworkingTests: XCTestCase {
         let frequency: LAAtcFrequency? = status.first { !$0.activeAtc.isEmpty }?.activeAtc.first
         XCTAssertNotNil(frequency, "Test can't be ran without a user")
         
-        var logbook: LALogbookPage<LALogbookAtcSession>!
+        var logbook: LAAtcLogbookPage!
         XCTAssertNoThrow(logbook = try client.getUserAtcSessions(frequency!.userId))
         XCTAssertNotEqual(logbook.data.count, 0, "Test can't be ran with 0 flights")
         let logbookAtc = logbook.data.randomElement()!

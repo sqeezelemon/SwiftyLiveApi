@@ -62,3 +62,6 @@ public struct LALogbookFlight: Decodable {
         case xp
     }
 }
+
+/// A page from the flights logbook.
+public typealias LAFlightLogbookPage = LALogbookPage<LALogbookFlight>
