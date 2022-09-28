@@ -75,3 +75,23 @@ public struct LAFlight: Decodable {
         _lastReport = try values.decode(LADate.self, forKey: .lastReport)
     }
 }
+
+extension LAFlight {
+    /// Current latitude of the aircraft.
+    public var latitude: Double {
+        get { position.latitude }
+        set { position.latitude = newValue }
+    }
+    
+    /// Current longitude of the aircraft.
+    public var longitude: Double {
+        get { position.longitude }
+        set { position.longitude = newValue }
+    }
+    
+    /// Current altitude of the aircraft.
+    public var altitude: Double {
+        get { position.altitude }
+        set { position.altitude = newValue }
+    }
+}

@@ -47,3 +47,35 @@ public struct LAAtcFrequency: Decodable {
                                  longitude: try values.decode(Double.self, forKey: .longitude))
     }
 }
+
+extension LAAtcFrequency {
+    /// Unique identifier for the facility.
+    public var frequencyId: String {
+        get { facility.id }
+        set { facility.id = newValue }
+    }
+    
+    /// ICAO code of the airport. `null` if center.
+    public var airportName: String? {
+        get { facility.icao }
+        set { facility.icao = newValue }
+    }
+    
+    /// Facility type.
+    public var type: LAFacilityType {
+        get { facility.type }
+        set { facility.type = newValue }
+    }
+    
+    /// Latitude of the facility.
+    public var latitude: Double {
+        get { facility.latitude }
+        set { facility.latitude = newValue }
+    }
+    
+    /// Longitude of the facility.
+    public var longitude: Double {
+        get { facility.longitude }
+        set { facility.longitude = newValue }
+    }
+}

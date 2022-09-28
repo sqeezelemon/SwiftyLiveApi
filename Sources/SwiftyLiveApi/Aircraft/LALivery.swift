@@ -36,3 +36,17 @@ public struct LALivery: Decodable {
         self.name = try container.decode(String.self, forKey: .liveryName)
     }
 }
+
+extension LALivery {
+    /// ID of the aircraft model.
+    public var aircraftId: String {
+        get { aircraft.id }
+        set { aircraft.id = newValue }
+    }
+    
+    /// Name of the aircraft model.
+    public var aircraftName: String {
+        get { aircraft.name }
+        set { aircraft.name = newValue }
+    }
+}

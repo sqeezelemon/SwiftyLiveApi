@@ -39,3 +39,23 @@ public struct LAPositionReport: Decodable {
         _date = try values.decode(LADate.self, forKey: .date)
     }
 }
+
+extension LAPositionReport {
+    /// Aircraft latitude at the time of the report.
+    public var latitude: Double {
+        get { position.latitude }
+        set { position.latitude = newValue }
+    }
+    
+    /// Aircraft longitude at the time of the report.
+    public var longitude: Double {
+        get { position.longitude }
+        set { position.longitude = newValue }
+    }
+    
+    /// Aircraft altitude at the time of the report.
+    public var altitude: Double {
+        get { position.altitude }
+        set { position.altitude = newValue }
+    }
+}
