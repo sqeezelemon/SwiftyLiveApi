@@ -14,7 +14,7 @@ public struct LALivery: Decodable {
         self.name = name
     }
     
-    /// UUID of the livery.
+    /// Unique ID of the livery.
     public var id: String
     /// Aircraft the livery is on.
     public var aircraft: LAAircraft
@@ -38,7 +38,7 @@ public struct LALivery: Decodable {
 }
 
 extension LALivery {
-    /// ID of the aircraft model.
+    /// Unique ID of the aircraft model.
     public var aircraftId: String {
         get { aircraft.id }
         set { aircraft.id = newValue }

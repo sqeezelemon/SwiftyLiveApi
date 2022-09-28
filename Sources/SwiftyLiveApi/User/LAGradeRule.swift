@@ -26,9 +26,9 @@ public struct LAGradeRule: Decodable {
     public var userValue: Double
     /// User's state in regards to meeting the rule.
     public var state: LAGradeState
-    /// The required value for this rule, nicely formatted.
-    public var userValueString: String
     /// User's value for this property, nicely formatted.
+    public var userValueString: String
+    /// The required value for this rule, nicely formatted.
     public var referenceString: String
     /// Definition for the rule.
     public var definition: LAGradeRuleDefinition
