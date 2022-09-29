@@ -1,10 +1,65 @@
-# SwiftyLiveApi
+# SwiftyLiveAPI
 
-SwiftyLiveApi is a simple package to work with Infinite Flight Live API. It features support for all available endpoints, safety mechanisms against exceeding request limits, Live API error types, beautiful documentation right in XCode and support up to Swift 3.
+SwiftyLiveApi is a wrapper around Infinite Flight Live API.
 
 ## Usage
 
-Setup is as easy as initializing an instance of ```LiveApiClient``` with your API key. If needed, you can set the ```requestLimitPerMinute``` value both in the initializer and later as just a value of the class. Please remember that just like on the road, unless you know what you're doing you shouldn't go over 100. Results have different extensions which transform stuff like ```Int``` frequency type into a nice enum. For your convenience, all functions are named almost exactly as the pages on them in the User Guide.
+The package is available for following platforms:
+| Platform | Min. Version |
+| -------- | ------------ |
+| iOS      | 10           |
+| TvOS     | 10           |
+| MacOS    | 10.12        |
 
-## Reporting bugs
-I tested it on random flights from expert server to the point I didn't get errors, but I could have easily missed an optional somewhere or misspelled a value. If you stumble upon something, just PM me your problem and a copy of the JSON response that causes problems on Discord or [IFC](https://community.infiniteflight.com/u/Alexander_Nikitin).
+### Installation
+
+This package is available with the Swift Package Manager in XCode.
+
+To install it manually, insert this in your `Package.swift`:
+```swift
+.package(url: "https://github.com/sqeezelemon/SwiftyLiveApi.git", from: "3.0.0")
+```
+
+and then add it to your target, for example, like this:
+
+```swift
+.target(name: "YourTarget", dependencies: [
+    .product(name: "SwiftyLiveApi", package: "SwiftyLiveApi")
+],
+``` 
+
+### Getting started
+
+[**Live API Docs**](https://infiniteflight.com/guide/developer-reference/live-api/)
+
+All SwiftyLiveApi types have a `LA` prefix, just like the big boy libraries.
+To get started, import `SwiftyConnectApi`, create an instance of `LAClient` and get straight into coding.
+The methods are named in accordance to their Developer Manual names. For example, the `Get Sessions` method becomes `getSessions()`.
+Some structures were changed and some variables were renamed for better uniformity and readability. In places where this might get confusing, variable aliases were added to help.
+
+```swift
+// 1) Import the package
+import SwiftyLiveApi
+
+// 2) Initialise the client
+let client = LAClient("your api key")
+
+// 3) Ready to rock!
+let sessions = try client.getSessions()
+```
+
+### Running tests
+
+In order for tests to work, please insert your Live API key into `Tests/SwiftyLiveApiTests/apikey.txt`, without any preceding whitespace. After that, the tests should run with your API key.
+To ignore changes to the file to avoid accidentally pushing your API key, use this command:
+
+```bash
+git update-index --skip-worktree Tests/SwiftyLiveApiTests/apikey.txt
+```
+
+### Reporting bugs
+
+If you encounter a bug, please file an issue with the reproduction steps and/or the json or request that caused problems.
+
+## Contacts
+[**@sqeezelemon** on IFC](https://community.infiniteflight.com/u/sqeezelemon)
