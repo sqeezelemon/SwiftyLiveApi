@@ -9,15 +9,15 @@ import Foundation
 /// Wrapper for all API responses.
 internal struct LAResponse<T: Decodable>: Decodable {
     /// API error code.
-    var errorCode: LAError
+    public var errorCode: LAError
     /// Response data.
-    var result: T
+    public var result: T
     
     private enum CodingKeys: CodingKey {
         case errorCode, result
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         errorCode  = try values.decode(LAError.self, forKey: .errorCode)
         guard errorCode == .ok else { throw errorCode }

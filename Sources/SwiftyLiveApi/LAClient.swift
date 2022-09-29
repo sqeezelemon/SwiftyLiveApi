@@ -12,13 +12,13 @@ public final class LAClient {
     //MARK: Properties
     
     /// Reusable URL components
-    var urlComponents = URLComponents()
+    private var urlComponents = URLComponents()
     /// URLSession to be used by the client.
-    let urlSession = URLSession(configuration: .ephemeral)
+    private let urlSession = URLSession(configuration: .ephemeral)
     /// JSON decoder to be used by the client
-    let decoder = JSONDecoder()
+    private let decoder = JSONDecoder()
     /// The API key used by the client.
-    var apiKey: String? {
+    public var apiKey: String? {
         set {
             urlComponents.queryItems = [
                 URLQueryItem(name: "apikey", value: newValue)

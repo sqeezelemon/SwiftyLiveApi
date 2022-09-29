@@ -21,7 +21,7 @@ public struct LALivery: Decodable {
     /// Name of the livery. Can differ between aircraft.
     public var name: String
     
-    internal enum CodingKeys: CodingKey {
+    private enum CodingKeys: CodingKey {
         case id
         case aircraftID
         case aircraftName

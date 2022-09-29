@@ -28,7 +28,7 @@ public struct LAAtcFrequency: Decodable {
     @LADate
     public var startTime: Date
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case frequencyId, airportName, type, latitude, longitude
         case userId, username, virtualOrganization, startTime
     }
