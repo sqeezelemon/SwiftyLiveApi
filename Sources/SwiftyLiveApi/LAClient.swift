@@ -17,8 +17,6 @@ public final class LAClient {
     let urlSession = URLSession(configuration: .ephemeral)
     /// JSON decoder to be used by the client
     let decoder = JSONDecoder()
-    /// DateFormatter used by the decoder.
-    let dateFormatter = DateFormatter()
     /// The API key used by the client.
     var apiKey: String? {
         set {
@@ -41,7 +39,6 @@ public final class LAClient {
     public init(_ apiKey: String) {
         urlComponents.host = "api.infiniteflight.com"
         urlComponents.scheme = "https"
-        decoder.dateDecodingStrategy = .formatted(dateFormatter)
         self.apiKey = apiKey
     }
     
