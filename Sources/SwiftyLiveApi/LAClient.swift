@@ -107,11 +107,32 @@ public final class LAClient {
         return try fetch(with: url)
     }
     
+    /// Retrieves info about an active session.
+    ///
+    /// - Parameter sessionId: ID of the session.
+    public func getSession(_ sessionId: String) throws -> LASession {
+        urlComponents.path = "/public/v2/sessions/\(sessionId)"
+        guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
+        return try fetch(with: url)
+    }
+    
     /// Retrieves a list of flights for a session.
     ///
     /// - Parameter sessionId: ID of the session.
     public func getFlights(_ sessionId: String) throws -> [LAFlight] {
         urlComponents.path = "/public/v2/sessions/\(sessionId)/flights"
+        guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
+        return try fetch(with: url)
+    }
+    
+    /// Retrieves info about an active flight on a specific session.
+    ///
+    /// - Parameters:
+    ///   - sessionId: ID of the session.
+    ///   - flightId: ID of the flight.
+    public func getSessionFlight(_ sessionId: String,
+                                 _ flightId: String) throws -> LAFlight {
+        urlComponents.path = "/public/v2/sessions/\(sessionId)/flights/\(flightId)"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
         return try fetch(with: url)
     }

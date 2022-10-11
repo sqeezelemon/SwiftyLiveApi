@@ -27,11 +27,31 @@ final class NetworkingTests: XCTestCase {
         XCTAssertNoThrow(try client.getSessions())
     }
     
+    func testGetSession() {
+        var sessions: [LASession]!
+        XCTAssertNoThrow(sessions = try client.getSessions())
+        XCTAssertNotEqual(sessions.count, 0, "Test can't be ran with 0 sessions")
+        XCTAssertNoThrow(try client.getSession(sessions[0].id))
+    }
+    
     func testGetFlights() {
         var sessions: [LASession]!
         XCTAssertNoThrow(sessions = try client.getSessions())
         XCTAssertNotEqual(sessions.count, 0, "Test can't be ran with 0 sessions")
         XCTAssertNoThrow(try client.getFlights(sessions[0].id))
+    }
+    
+    func testGetSessionFlight() {
+        var sessions: [LASession]!
+        XCTAssertNoThrow(sessions = try client.getSessions())
+        XCTAssertNotEqual(sessions.count, 0, "Test can't be ran with 0 sessions")
+        let session = sessions.first { !$0.name.contains("Casual") } ?? sessions.randomElement()!
+        
+        var flights: [LAFlight]!
+        XCTAssertNoThrow(flights = try client.getFlights(session.id))
+        XCTAssertNotEqual(flights.count, 0, "Test can't be ran with 0 flights")
+        
+        XCTAssertNoThrow(try client.getSessionFlight(session.id, flights.randomElement()!.flightId))
     }
     
     func testGetFlightRoute() {
@@ -220,7 +240,9 @@ final class NetworkingTests: XCTestCase {
     
     static var allTests = [
         ("Get Sessions", testGetSessions),
+        ("Get Session", testGetSession),
         ("Get Flights", testGetFlights),
+        ("Get Session Flight", testGetSessionFlight),
         ("Get Flight Route", testGetFlightRoute),
         ("Get Flight Plan", testGetFlightPlan),
         ("Get Active ATC Facilities", testGetActiveATC),
