@@ -227,6 +227,13 @@ final class NetworkingTests: XCTestCase {
         XCTAssertNoThrow(try client.getAircraft())
     }
     
+    func testGetAircraftSingle() {
+        var aircraft: [LAAircraft]!
+        XCTAssertNoThrow(aircraft = try client.getAircraft())
+        XCTAssertNotEqual(aircraft.count, 0)
+        XCTAssertNoThrow(try client.getAircraft(aircraft.randomElement()!.id))
+    }
+    
     func testGetAircraftLiveries() {
         var aircraft: [LAAircraft]!
         XCTAssertNoThrow(aircraft = try client.getAircraft())
@@ -258,6 +265,7 @@ final class NetworkingTests: XCTestCase {
         ("Get User ATC Session", testGetUserAtcSession),
         ("Get NOTAMs", testGetNotams),
         ("Get Aircraft", testGetAircraft),
+        ("Get Aircraft (Single)", testGetAircraftSingle),
         ("Get Aircraft Liveries", testGetAircraftLiveries),
         ("Get Liveries", testGetLiveries)
     ]

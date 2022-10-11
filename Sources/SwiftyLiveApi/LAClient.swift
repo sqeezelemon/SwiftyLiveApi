@@ -314,6 +314,15 @@ public final class LAClient {
         return try fetch(with: url)
     }
     
+    /// Retrieves a single aircraft.
+    ///
+    /// - Parameter aircraftId: ID of the aircraft.
+    public func getAircraft(_ aircraftId: String) throws -> LAAircraft {
+        urlComponents.path = "/public/v2/aircraft/\(aircraftId)"
+        guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
+        return try fetch(with: url)
+    }
+    
     /// Retrieves the list of liveries for a given aircraft in the latest Infinite Flight version.
     ///
     /// - Parameter aircraftId: ID of the aircraft.
