@@ -176,9 +176,9 @@ public final class LAClient {
     ///   - userIds: ID of the user, retrieveable from other endpoints.
     ///   - usernames: IFC usernames.
     ///   - userHashes: Short identifiers, as seen in-app.
-    public func getUserStats(_ userIds: [String] = [],
-                             _ usernames: [String] = [],
-                             _ userHashes: [String] = []) throws -> [LAUserStats] {
+    public func getUserStats(userIds: [String] = [],
+                             usernames: [String] = [],
+                             userHashes: [String] = []) throws -> [LAUserStats] {
         urlComponents.path = "/public/v2/users"
         guard let url = urlComponents.url else { throw LAClientError.urlIsNil }
         var request = URLRequest(url: url)
@@ -249,7 +249,7 @@ public final class LAClient {
     ///   - userId: ID of the user.
     ///   - page: The logbook page to fetch. Defaults to `1`.
     public func getUserFlights(_ userId: String,
-                               _ page: Int = 1) throws -> LAFlightLogbookPage {
+                               page: Int = 1) throws -> LAFlightLogbookPage {
         var compsCopy = urlComponents
         compsCopy.queryItems?.append(URLQueryItem(name: "page",
                                                       value: "\(page)"))
@@ -277,7 +277,7 @@ public final class LAClient {
     ///   - userId: ID of the user.
     ///   - page: The logbook page to fetch. Defaults to `1`.
     public func getUserAtcSessions(_ userId: String,
-                                   _ page: Int = 1) throws -> LAAtcLogbookPage {
+                                   page: Int = 1) throws -> LAAtcLogbookPage {
         var compsCopy = urlComponents
         compsCopy.queryItems?.append(URLQueryItem(name: "page",
                                                       value: "\(page)"))

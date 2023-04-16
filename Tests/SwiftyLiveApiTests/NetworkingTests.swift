@@ -95,7 +95,9 @@ final class NetworkingTests: XCTestCase {
         let usernames: [String] = ["Laura", "Cameron"]
         let userIds: [String] = []
         let hashes: [String] = []
-        XCTAssertNoThrow(try client.getUserStats(userIds, usernames, hashes))
+        XCTAssertNoThrow(try client.getUserStats(userIds: userIds,
+                                                 usernames: usernames,
+                                                 userHashes: hashes))
     }
     
     func testGetUserGrade() {
@@ -160,7 +162,7 @@ final class NetworkingTests: XCTestCase {
         let flight = flights.first { $0.position.altitude > 30000 } ?? flights.randomElement()!
         
         XCTAssertNoThrow(try client.getUserFlights(flight.userId))
-        XCTAssertNoThrow(try client.getUserFlights(flight.userId, 2))
+        XCTAssertNoThrow(try client.getUserFlights(flight.userId, page: 2))
     }
     
     func testGetUserFlight() {
@@ -194,7 +196,7 @@ final class NetworkingTests: XCTestCase {
         XCTAssertNotNil(frequency, "Test can't be ran without a user")
         
         XCTAssertNoThrow(try client.getUserAtcSessions(frequency!.userId))
-        XCTAssertNoThrow(try client.getUserAtcSessions(frequency!.userId, 2))
+        XCTAssertNoThrow(try client.getUserAtcSessions(frequency!.userId, page: 2))
     }
     
     func testGetUserAtcSession() {
